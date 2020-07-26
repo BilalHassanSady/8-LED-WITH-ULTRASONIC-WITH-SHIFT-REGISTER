@@ -1,0 +1,85 @@
+int latch = 3;
+int clock1 = 4;
+int data1 = 5;
+int trig = 6;
+int echo = 7;
+long distance ;
+long duration ;
+
+void setup(){
+ pinMode(trig,OUTPUT);
+ pinMode(echo,INPUT);
+pinMode(latch,OUTPUT);
+pinMode(clock1,OUTPUT);
+  pinMode(data1,OUTPUT);
+    
+}
+
+int calculateDistance(){ 
+  
+  digitalWrite(trig, LOW); 
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH); 
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+  duration = pulseIn(echo, HIGH); 
+  distance= duration*0.034/2;
+  return distance;
+}
+
+
+void loop(){
+int x = calculateDistance();
+if(x<50){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00000001);
+ digitalWrite(latch,HIGH);
+}
+   else{
+    digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00000000);
+  digitalWrite(latch,HIGH);
+
+  }
+  if(x<45){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00000011);
+  digitalWrite(latch,HIGH);
+}
+    
+  if(x<40){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00000111);
+  digitalWrite(latch,HIGH);
+}
+    if(x<40){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00001111);
+  digitalWrite(latch,HIGH);
+}
+    if(x<35){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00011111);
+  digitalWrite(latch,HIGH);
+}
+      if(x<25){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00111111);
+  digitalWrite(latch,HIGH);
+}
+        if(x<20){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b01111111);
+  digitalWrite(latch,HIGH);
+}
+        if(x<15){//YOU CAN CHOOSE DISTANE IN CM
+digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b11111111);
+  digitalWrite(latch,HIGH);
+}
+  else{
+    digitalWrite(latch,LOW);
+  shiftOut(data1,clock1,LSBFIRST,0b00000000);
+  digitalWrite(latch,HIGH);
+
+  }}
